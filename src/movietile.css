@@ -1,0 +1,32 @@
+.wrapper-movie-tile{
+    margin: 50px;
+}
+
+
+.wrapper-movie-tile-inner{
+    width: 300px;
+    display: inline-block;
+    vertical-align: top;
+    height: 300px;
+    margin-bottom: 17px;
+    margin-right: 10px;
+}
+
+.wrapper-movie-tile-inner  img{
+    width: 100%;
+    height: 300px;
+}
+
+.descWrapper{
+    text-align: left;
+    width: 600px;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding: 10px;
+    box-shadow: 2px 2px 2px 2px #888888;
+    }
+
+    .descWrapper ul{
+        list-style: none;
+    }
+
