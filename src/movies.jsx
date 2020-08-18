@@ -6,11 +6,12 @@ import { DescriptionComponent } from "./Description.jsx";
 
 export const MoviesTiles = () => {
   const [movies, getMovies] = useState();
-  const [loading, setloding] = useState(true);
+  const [loading, setloding] = useState(false);
   const [error, setError] = useState("");
+  const [moviecode, setMovieCode] = useState("");
 
-  useEffect(() => {
-    fetch("https://www.omdbapi.com/?apikey=b9bd48a6&s=All&type=Movie")
+  const clickMovieAjax = () => {
+    fetch(`http://www.omdbapi.com/?apikey=b9bd48a6&s=${moviecode}&type=movie`)
       .then(res => res.json())
       .then(data => {
         getMovies(data);
@@ -21,12 +22,19 @@ export const MoviesTiles = () => {
         setloding(false);
         setError("Something wet wrong");
       });
-  });
+  };
 
   return (
     <div>
       <div>
-        {loading ? "..loading" : <SearchPanelWithCards data={movies} />}
+        <div>
+          <SearchPanelWithCards
+            data={movies}
+            clickMovieAjax={clickMovieAjax}
+            setMovieCode={setMovieCode}
+          />
+          {movies && movies.Error}
+        </div>
       </div>
     </div>
   );
@@ -48,13 +56,13 @@ export const SearchPanelWithCards = props => {
           render={() => {
             return (
               <div>
-                {" "}
                 <h1>Search For Movie</h1>
                 <input
                   id={"search-input"}
                   type="text"
-                  onChange={event => setKeyWord(event.target.value)}
+                  onChange={event => props.setMovieCode(event.target.value)}
                 />
+                <button onClick={() => props.clickMovieAjax()}>Search</button>
               </div>
             );
           }}
@@ -69,6 +77,7 @@ export const SearchPanelWithCards = props => {
               <div className="wrapper-movie-tile">
                 {props &&
                   props.data &&
+                  props.data.Search &&
                   props.data.Search.filter(movie =>
                     movie.Title.includes(keyWord.length >= 2 ? keyWord : "")
                   ).map(movie => {
@@ -81,9 +90,6 @@ export const SearchPanelWithCards = props => {
                           <div>
                             <img src={movie.Poster} alt="Girl in a jacket" />
                           </div>
-                          <div></div>
-                          <div></div>
-                          <div></div>
                         </Link>
                       </div>
                     );
