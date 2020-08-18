@@ -11,7 +11,7 @@ export const MoviesTiles = () => {
   const [moviecode, setMovieCode] = useState("");
 
   const clickMovieAjax = () => {
-    fetch(`http://www.omdbapi.com/?apikey=b9bd48a6&s=${moviecode}&type=movie`)
+    fetch(`https://www.omdbapi.com/?apikey=b9bd48a6&s=${moviecode}&type=movie`)
       .then(res => res.json())
       .then(data => {
         getMovies(data);
