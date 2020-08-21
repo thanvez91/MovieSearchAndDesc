@@ -36,7 +36,7 @@ export const DescriptionComponent = props => {
             <p><b>imdbRating:</b>{desc.imdbRating}</p>
           </div>
         ) : (
-          "...Loading"
+          ".....Loading"
         )}
       </div>
     );
